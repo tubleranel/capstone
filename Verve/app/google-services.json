@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "406011627239",
+    "firebase_url": "https://verveapp-843ab.firebaseio.com",
+    "project_id": "verveapp-843ab",
+    "storage_bucket": "verveapp-843ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406011627239:android:4d2cdc83d4651682",
+        "android_client_info": {
+          "package_name": "capstone.com.verve"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406011627239-qbmqieq461eb7mvdh4agqh9i40kvmkhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "capstone.com.verve",
+            "certificate_hash": "97e67809a8288e0b5bf4c70ab02eaddc8714c2d1"
+          }
+        },
+        {
+          "client_id": "406011627239-ka4pk9tkpr7644qomuqha4edg81tquld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCW3AJmtXQRyM-ZIpMGrN5QjPME6nr1c8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406011627239-ka4pk9tkpr7644qomuqha4edg81tquld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

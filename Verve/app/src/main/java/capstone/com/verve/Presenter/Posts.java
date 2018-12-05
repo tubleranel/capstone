@@ -108,7 +108,7 @@ public class Posts {
 
 
     public void saveComment(final DatabaseReference userRef, final FirebaseAuth auth, final String postKey,
-                            final DatabaseReference postRef, final Context context, final EditText comment) {
+                            final DatabaseReference postRef, final Context context,  final String comment) {
         //FOR UNIQUE NAME
         Calendar calendarDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMMM:dd:yyyy");
@@ -127,7 +127,7 @@ public class Posts {
         SimpleDateFormat currentTimePost = new SimpleDateFormat("HH:mm a");
         commentTimePost = currentTimePost.format(calendarTimePost.getTime());
 
-        final String commentPost = comment.getText().toString().trim();
+        //final String commentPost = comment.getText().toString();
 
 
         String currUser = auth.getCurrentUser().getUid();
@@ -143,13 +143,13 @@ public class Posts {
                     String lastname = dataSnapshot.child("lastname").getValue(String.class);
 
                     UserComments userComments = new UserComments(firstname, middlename, lastname, commentDatePost,
-                            commentTimePost, commentPost);
+                            commentTimePost, comment);
 
                     postRef.child(postKey).child("Comments").child(commentUniqueKey).setValue(userComments).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(context, "Post Added Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Comment Added Successfully", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }

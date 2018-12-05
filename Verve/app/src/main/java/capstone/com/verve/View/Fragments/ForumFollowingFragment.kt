@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
 import capstone.com.verve.Presenter.Posts
 import capstone.com.verve.Presenter.UserPosts
 import capstone.com.verve.Presenter.Users
@@ -53,7 +55,9 @@ class ForumFollowingFragment : Fragment() {
     private var auth: FirebaseAuth? = null
     internal var posts = Posts()
 
-    var editComment: EditText? = null
+    private var editComment: EditText? = null
+
+    var commentImage: ImageButton? = null
 
     private var postId: String? = null
 
@@ -75,11 +79,6 @@ class ForumFollowingFragment : Fragment() {
         var rootView = inflater.inflate(R.layout.fragment_forum_following, container, false)
         mRecyclerView = rootView.findViewById(R.id.followingRecyclerView)
 
-        editComment = rootView.findViewById(R.id.editComment)
-
-        userRef = FirebaseDatabase.getInstance().reference.child("Users")
-        postRef = FirebaseDatabase.getInstance().reference.child("Posts")
-        auth = FirebaseAuth.getInstance()
 
         return rootView
     }
@@ -129,12 +128,27 @@ class ForumFollowingFragment : Fragment() {
         mPostsViewHolder = object : FirebaseRecyclerAdapter<UserPosts, PostsViewHolder>(postsOptions) {
             override fun onBindViewHolder(holder: PostsViewHolder, position: Int, model: UserPosts) {
                 holder.bind(getItem(position))
-                postId = getRef(position).key
+
+                commentImage?.setOnClickListener {
+
+                    postId = getRef(position).key
+
+
+                    posts.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment!!.text.toString())
+                }
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_post_forum, parent, false)
+
+                editComment = view.findViewById(R.id.editComment)
+                commentImage = view.findViewById(R.id.btnCommentPost)
+
+                userRef = FirebaseDatabase.getInstance().reference.child("Users")
+                postRef = FirebaseDatabase.getInstance().reference.child("Posts")
+                auth = FirebaseAuth.getInstance()
+
 
                 return PostsViewHolder(view)
             }
@@ -209,7 +223,7 @@ class ForumFollowingFragment : Fragment() {
 
     fun option(v: View) {
         if (v.id == R.id.btnCommentPost) {
-            posts.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment)
+
         }
     }
 }

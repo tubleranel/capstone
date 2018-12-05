@@ -108,7 +108,7 @@ public class Posts {
 
 
     public void saveComment(final DatabaseReference userRef, final FirebaseAuth auth, final String postKey,
-                            final DatabaseReference postRef, final Context context,  final String comment) {
+                            final DatabaseReference postRef, final Context context,  EditText comment) {
         //FOR UNIQUE NAME
         Calendar calendarDate = Calendar.getInstance();
         SimpleDateFormat currentDate = new SimpleDateFormat("MMMM:dd:yyyy");
@@ -127,7 +127,7 @@ public class Posts {
         SimpleDateFormat currentTimePost = new SimpleDateFormat("HH:mm a");
         commentTimePost = currentTimePost.format(calendarTimePost.getTime());
 
-        //final String commentPost = comment.getText().toString();
+        final String commentPost = comment.getText().toString();
 
 
         String currUser = auth.getCurrentUser().getUid();
@@ -143,7 +143,7 @@ public class Posts {
                     String lastname = dataSnapshot.child("lastname").getValue(String.class);
 
                     UserComments userComments = new UserComments(firstname, middlename, lastname, commentDatePost,
-                            commentTimePost, comment);
+                            commentTimePost, commentPost);
 
                     postRef.child(postKey).child("Comments").child(commentUniqueKey).setValue(userComments).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

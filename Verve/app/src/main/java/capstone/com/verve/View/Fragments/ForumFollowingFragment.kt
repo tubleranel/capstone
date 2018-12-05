@@ -129,13 +129,7 @@ class ForumFollowingFragment : Fragment() {
             override fun onBindViewHolder(holder: PostsViewHolder, position: Int, model: UserPosts) {
                 holder.bind(getItem(position))
 
-                commentImage?.setOnClickListener {
-
-                    postId = getRef(position).key
-
-
-                    posts.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment!!.text.toString())
-                }
+                postId = getRef(position).key
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
@@ -149,7 +143,9 @@ class ForumFollowingFragment : Fragment() {
                 postRef = FirebaseDatabase.getInstance().reference.child("Posts")
                 auth = FirebaseAuth.getInstance()
 
-
+                commentImage?.setOnClickListener {
+                    posts.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment)
+                }
                 return PostsViewHolder(view)
             }
 

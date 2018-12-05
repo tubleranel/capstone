@@ -49,5 +49,9 @@ class ForumRecyclerViewAdapter (var items: MutableList<ForumData>) : RecyclerVie
         }
     }
 
+     fun option(v: View){
+
+    }
+
 
 }

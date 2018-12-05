@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +23,11 @@ public class Posts {
     String saveCurrentTime = "";
     String saveCurrentTimePost = "";
     String saveCurrentDatePost = "";
-
+    String commentDate = "";
+    String commentTime = "";
+    String commentDatePost = "";
+    String commentTimePost = "";
+    String commentUniqueKey = "";
 
     public void savePosts(final DatabaseReference userRef, final DatabaseReference postRef, FirebaseAuth auth,
                           EditText postTitle, EditText descTitle, final Context context) {
@@ -43,7 +48,7 @@ public class Posts {
 
         Calendar calendarTimePost = Calendar.getInstance();
         SimpleDateFormat currentTimePost = new SimpleDateFormat("HH:mm a");
-        saveCurrentTimePost =  currentTimePost.format(calendarTimePost.getTime());
+        saveCurrentTimePost = currentTimePost.format(calendarTimePost.getTime());
 
 
         final String currUser = auth.getCurrentUser().getUid();
@@ -98,7 +103,69 @@ public class Posts {
             }
         });
 
+
     }
 
 
+    public void saveComment(final DatabaseReference userRef, final FirebaseAuth auth, final String postKey,
+                            final DatabaseReference postRef, final Context context, final EditText comment) {
+        //FOR UNIQUE NAME
+        Calendar calendarDate = Calendar.getInstance();
+        SimpleDateFormat currentDate = new SimpleDateFormat("MMMM:dd:yyyy");
+        commentDate = currentDate.format(calendarDate.getTime());
+
+        Calendar calendarTime = Calendar.getInstance();
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss:SSS");
+        commentTime = currentTime.format(calendarTime.getTime());
+
+        //FOR POST TIME AND DATE
+        Calendar calendarDatePost = Calendar.getInstance();
+        SimpleDateFormat currentDatePost = new SimpleDateFormat("MM/dd/yyyy");
+        commentDatePost = currentDatePost.format(calendarDatePost.getTime());
+
+        Calendar calendarTimePost = Calendar.getInstance();
+        SimpleDateFormat currentTimePost = new SimpleDateFormat("HH:mm a");
+        commentTimePost = currentTimePost.format(calendarTimePost.getTime());
+
+        final String commentPost = comment.getText().toString().trim();
+
+
+        String currUser = auth.getCurrentUser().getUid();
+
+        commentUniqueKey = currUser.concat(commentDate).concat(commentTime);
+
+        userRef.child(currUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String firstname = dataSnapshot.child("firstname").getValue(String.class);
+                    String middlename = dataSnapshot.child("middlename").getValue(String.class);
+                    String lastname = dataSnapshot.child("lastname").getValue(String.class);
+
+                    UserComments userComments = new UserComments(firstname, middlename, lastname, commentDatePost,
+                            commentTimePost, commentPost);
+
+                    postRef.child(postKey).child("Comments").child(commentUniqueKey).setValue(userComments).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(context, "Post Added Successfully", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                } else {
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

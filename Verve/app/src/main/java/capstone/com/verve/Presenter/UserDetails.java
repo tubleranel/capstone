@@ -12,6 +12,8 @@ public class UserDetails {
 
     Users users = new Users();
 
+
+
     public void getUserProfile(DatabaseReference profileReference, final TextView username, final TextView name, final TextView email,
                                final TextView birthDate, final TextView userAddress){
 

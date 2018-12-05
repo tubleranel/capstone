@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import capstone.com.verve.Presenter.Posts
 import capstone.com.verve.Presenter.UserPosts
 import capstone.com.verve.Presenter.Users
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_forum_following.*
 import kotlinx.android.synthetic.main.item_post_forum.view.*
 import com.firebase.ui.database.FirebaseRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,6 +48,14 @@ class ForumFollowingFragment : Fragment() {
     lateinit var mPostsViewHolder: FirebaseRecyclerAdapter<UserPosts, PostsViewHolder>
     lateinit var mRecyclerView: RecyclerView
     lateinit var mDatabase: DatabaseReference
+    private var postRef: DatabaseReference? = null
+    private var userRef: DatabaseReference? = null
+    private var auth: FirebaseAuth? = null
+    internal var posts = Posts()
+
+    var editComment: EditText? = null
+
+    private var postId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +63,8 @@ class ForumFollowingFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -62,6 +74,12 @@ class ForumFollowingFragment : Fragment() {
         // Inflate the layout for this fragment
         var rootView = inflater.inflate(R.layout.fragment_forum_following, container, false)
         mRecyclerView = rootView.findViewById(R.id.followingRecyclerView)
+
+        editComment = rootView.findViewById(R.id.editComment)
+
+        userRef = FirebaseDatabase.getInstance().reference.child("Users")
+        postRef = FirebaseDatabase.getInstance().reference.child("Posts")
+        auth = FirebaseAuth.getInstance()
 
         return rootView
     }
@@ -111,6 +129,7 @@ class ForumFollowingFragment : Fragment() {
         mPostsViewHolder = object : FirebaseRecyclerAdapter<UserPosts, PostsViewHolder>(postsOptions) {
             override fun onBindViewHolder(holder: PostsViewHolder, position: Int, model: UserPosts) {
                 holder.bind(getItem(position))
+                postId = getRef(position).key
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostsViewHolder {
@@ -129,6 +148,7 @@ class ForumFollowingFragment : Fragment() {
 
         fun bind(post: UserPosts) = with(itemView) {
             txtDate?.text = post.datePost
+
 
             if (post.middlename.isEmpty()) {
                 txtName?.text = post.firstname.plus(" " + post.lastname)
@@ -185,5 +205,11 @@ class ForumFollowingFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    fun option(v: View) {
+        if (v.id == R.id.btnCommentPost) {
+            posts.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment)
+        }
     }
 }

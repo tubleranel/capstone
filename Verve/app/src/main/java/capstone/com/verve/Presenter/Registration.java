@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import capstone.com.verve.API.Security;
 import capstone.com.verve.View.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -13,12 +14,27 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.scottyab.aescrypt.AESCrypt;
+
+import java.security.GeneralSecurityException;
 
 public class Registration {
     String gender = "";
     Users getInfo = new Users();
 
+    Security sec = new Security();
 
+
+    String encryptedFirstName = "";
+    String encryptedMiddleName = "";
+    String encryptedLastName = "";
+    String encryptedUsername = "";
+    String encryptedMobile = "";
+    String encryptedEmail = "";
+    String encryptedAddress = "";
+    String encryptedBirthdate = "";
+    String encryptedGender = "";
+    String encryptedRole = "";
 
     public void registerPatient(EditText firstname, EditText middlename,
                                 EditText lastname, EditText username,
@@ -38,6 +54,21 @@ public class Registration {
         String et_birthdate = birthdate.getText().toString().trim();
         String rad_male = male.getText().toString().trim();
         String rad_female = female.getText().toString().trim();
+
+        try {
+            encryptedFirstName = AESCrypt.encrypt(sec.setSecurityKey(), et_firstname);
+            encryptedMiddleName = AESCrypt.encrypt(sec.setSecurityKey(), et_middlename);
+            encryptedLastName = AESCrypt.encrypt(sec.setSecurityKey(), et_lastname);
+            encryptedUsername = AESCrypt.encrypt(sec.setSecurityKey(), et_username);
+            encryptedMobile= AESCrypt.encrypt(sec.setSecurityKey(), et_mobile);
+            encryptedEmail = AESCrypt.encrypt(sec.setSecurityKey(), et_email);
+            encryptedAddress = AESCrypt.encrypt(sec.setSecurityKey(), et_address);
+            encryptedBirthdate = AESCrypt.encrypt(sec.setSecurityKey(), et_birthdate);
+            encryptedRole = AESCrypt.encrypt(sec.setSecurityKey(), "Patient");
+
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
 
         if (et_firstname.isEmpty()) {
             firstname.setError("First Name is Required!");
@@ -77,9 +108,9 @@ public class Registration {
         getGender(male, female);
 
 
-        userAndEmailAuth(et_email, et_password, et_firstname, et_middlename,
-                et_lastname, et_username, et_mobile, et_address, et_birthdate, getInfo.getGender(),
-                "Patient", context, auth, user);
+        userAndEmailAuth(et_email, et_password, encryptedFirstName, encryptedMiddleName,
+                encryptedLastName, encryptedLastName, encryptedMobile, encryptedAddress, encryptedBirthdate, getInfo.getGender(),
+                encryptedRole, context, auth, user);
     }
 
     private void userAndEmailAuth(final String email, String password, final String firstname, final String middlename,
@@ -125,10 +156,21 @@ public class Registration {
     public void getGender(RadioButton rad_male, RadioButton rad_female) {
         if (rad_male.isChecked()) {
             gender = "Male";
-            getInfo.setGender(gender);
+            try {
+                encryptedGender = AESCrypt.encrypt(sec.setSecurityKey(), gender);
+                getInfo.setGender(encryptedGender);
+            } catch (GeneralSecurityException e) {
+                e.printStackTrace();
+            }
         } else if (rad_female.isChecked()) {
             gender = "Female";
             getInfo.setGender(gender);
+            try {
+                encryptedGender = AESCrypt.encrypt(sec.setSecurityKey(), gender);
+                getInfo.setGender(encryptedGender);
+            } catch (GeneralSecurityException e) {
+                e.printStackTrace();
+            }
         }
 
     }

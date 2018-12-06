@@ -2,15 +2,28 @@ package capstone.com.verve.Presenter;
 
 import android.support.annotation.NonNull;
 import android.widget.TextView;
+import capstone.com.verve.API.Security;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.scottyab.aescrypt.AESCrypt;
 import org.w3c.dom.Text;
+
+import java.security.GeneralSecurityException;
 
 public class UserDetails {
 
     Users users = new Users();
+    Security security = new Security();
+    String decryptedFirstName = "";
+    String decryptedMiddleName = "";
+    String decryptedLastName = "";
+    String decryptedEmail = "";
+    String decryptedBirthday = "";
+    String decryptedAddress = "";
+    String decryptedUsername = "";
+    String key = security.setSecurityKey();
 
 
 
@@ -29,19 +42,35 @@ public class UserDetails {
                     String birthday = dataSnapshot.child("birthday").getValue().toString();
                     String address = dataSnapshot.child("address").getValue().toString();
 
-                    if (middlename.isEmpty()){
-                        String nameNoMiddle = firstname.concat(" " + lastname);
+                    try {
+                        decryptedUsername = AESCrypt.decrypt(key, uName);
+                        decryptedFirstName = AESCrypt.decrypt(key, firstname);
+                        decryptedMiddleName = AESCrypt.decrypt(key, middlename);
+                        decryptedLastName = AESCrypt.decrypt(key, lastname);
+                        //decryptedEmail = AESCrypt.decrypt(key, emailAddress);
+                        decryptedBirthday = AESCrypt.decrypt(key, birthday);
+                        decryptedAddress = AESCrypt.decrypt(key, address);
+
+
+                    } catch (GeneralSecurityException e) {
+                        e.printStackTrace();
+                    }
+
+                    username.setText(decryptedUsername);
+                    userAddress.setText(decryptedAddress);
+                    email.setText(emailAddress);
+                    birthDate.setText(decryptedBirthday);
+
+                    if (decryptedMiddleName.isEmpty()){
+                        String nameNoMiddle = decryptedFirstName.concat(" " + decryptedLastName);
                         users.setWholeName(nameNoMiddle);
                         name.setText(users.getWholeName());
                     }else{
-                        String nameWithMiddle = firstname.concat(" " + middlename.charAt(0) + ".").concat(" " + lastname);
+                        String nameWithMiddle = decryptedFirstName.concat(" " + decryptedMiddleName.charAt(0) + ".").concat(" " + decryptedLastName);
                         users.setWholeName(nameWithMiddle);
                         name.setText(nameWithMiddle);
                     }
-                    username.setText(uName);
-                    userAddress.setText(address);
-                    email.setText(emailAddress);
-                    birthDate.setText(birthday);
+
 
                 }
             }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 import android.widget.Toast;
+import capstone.com.verve.API.Security;
 import capstone.com.verve.View.ForumActivity;
 import capstone.com.verve.View.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -13,11 +14,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
+import com.scottyab.aescrypt.AESCrypt;
+
+import java.security.GeneralSecurityException;
 
 public class Login {
     Users users = new Users();
     String patient = "Patient";
     Boolean emailAddressChecker = false;
+    Security sec = new Security();
+    String decryptRole = "";
 
 
     public void allowUserToLogin(EditText email, EditText password, Context context, FirebaseAuth auth, FirebaseUser user) {
@@ -55,7 +61,12 @@ public class Login {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 String role = dataSnapshot.child("role").getValue(String.class);
-                                if (role.equals(patient)) {
+                                try{
+                                    decryptRole = AESCrypt.decrypt(sec.setSecurityKey(), role);
+                                } catch (GeneralSecurityException e) {
+                                    e.printStackTrace();
+                                }
+                                if (decryptRole.equals(patient)) {
                                     sendPatientToForum(context);
                                 }
                             }

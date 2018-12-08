@@ -8,7 +8,6 @@ abstract class BaseView : AppCompatActivity() {
 
     lateinit var progressDialog : ProgressDialog
 
-
     fun showProgressDialog () {
         progressDialog = indeterminateProgressDialog("Loading...")
         progressDialog.show()

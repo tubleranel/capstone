@@ -28,7 +28,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:gravity="right"
-            android:text="ALREADY HEAVE AN ACCOUNT?"
+            android:text="LOGIN"
             android:textColor="@android:color/white"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -64,15 +64,14 @@
             android:cropToPadding="false"
             android:padding="80dp"
             android:scaleType="center"
-            app:layout_constraintBottom_toTopOf="@+id/guideline11"
+            app:layout_constraintBottom_toTopOf="@+id/guideline13"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.491"
-            app:srcCompat="@mipmap/ic_patient"
-            tools:srcCompat="@mipmap/ic_patient"
-            android:layout_marginBottom="69dp"/>
+            app:srcCompat="@drawable/patienticon"
+            android:layout_marginTop="16dp"/>
 
     <Button
             android:id="@+id/btn_register"
@@ -83,7 +82,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/btn_rounded_green"
+            android:background="@drawable/btn_rounded_greenn"
             android:elevation="200dp"
             android:letterSpacing="0.1"
             android:text="REGISTER"

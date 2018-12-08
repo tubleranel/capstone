@@ -25,7 +25,7 @@ class ForumRecyclerViewAdapter (var items: MutableList<ForumData>) : RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return itemsList.size ?: 0
+        return itemsList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

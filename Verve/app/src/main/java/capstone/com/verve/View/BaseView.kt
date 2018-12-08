@@ -17,6 +17,10 @@ abstract class BaseView : AppCompatActivity() {
         progressDialog.show()
     }
 
+    fun hideProgressDialog () {
+        progressDialog.dismiss()
+    }
+
     fun EditText.hideSoftKeyboardOnFocusLostEnabled(enabled: Boolean) {
         val listener = if (enabled)
             OnFocusLostListener()

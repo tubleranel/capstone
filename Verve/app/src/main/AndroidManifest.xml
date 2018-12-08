@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="capstone.com.verve">
+		  package="capstone.com.verve">
 
-	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.INTERNET"/>
 
 	<application
-		android:allowBackup="true"
-		android:icon="@mipmap/ic_vervelogo_green"
-		android:label="@string/app_name"
-		android:supportsRtl="true"
-		android:theme="@style/AppTheme">
-		<activity android:name=".View.SplashActivity" >
+			android:allowBackup="true"
+			android:icon="@mipmap/ic_vervelogo_green"
+			android:label="@string/app_name"
+			android:supportsRtl="true"
+			android:theme="@style/AppTheme">
+		<activity android:name=".View.SplashActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
@@ -23,17 +23,21 @@
 		</activity>
 		<activity android:name=".View.ForgotPasswordActivity">
 		</activity>
-		<!--<activity
+		<!--
+        <activity
 			android:name=".View.SideMenuActivity"
 			android:label="@string/title_activity_side_menu"
 			android:theme="@style/AppTheme" >
-		</activity>-->
+		</activity>
+        -->
 
 		<activity
-			android:name=".View.ForumActivity"
-			android:windowSoftInputMode="stateHidden|adjustPan">
+				android:name=".View.ForumActivity"
+				android:windowSoftInputMode="stateHidden|adjustPan">
 		</activity>
 		<activity android:name=".View.ProfileActivity">
+		</activity>
+		<activity android:name=".View.FindActivity">
 		</activity>
 	</application>
 

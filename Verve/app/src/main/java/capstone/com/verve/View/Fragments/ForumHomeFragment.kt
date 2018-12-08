@@ -21,6 +21,7 @@ import capstone.com.verve.Presenter.Users
 import capstone.com.verve.R
 import capstone.com.verve.View.Adapters.ForumPagerAdapter
 import capstone.com.verve.View.Adapters.ForumRecyclerViewAdapter
+import capstone.com.verve.View.BaseView
 import capstone.com.verve.View.ForumActivity
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.google.firebase.database.DatabaseReference
@@ -103,25 +104,6 @@ class ForumHomeFragment : Fragment() {
         var layoutManager = LinearLayoutManager(context)
         mRecyclerView.layoutManager = layoutManager
 
-        /* for (i in 1..10) {
-             var postsData = ForumData()
-
-             postsData.setUname("John Ranel Tuble $i")
-             postsData.setUdate("11/25/2018")
-             postsData.setUtime("12:15 PM")
-             postsData.setcomments("6")
-             postsData.sethearts("15")
-             postsData.setPosttitle("I SURVIVED!")
-             postsData.setPostdetails("I want to express my deepest gratitude to my family and friends for being with me during this challenging journey")
-             postsData.setdateComment("11/25/2018")
-             postsData.settimeComment("11:25 PM")
-             postsData.setlastPerson("Syuujie Yoshino")
-             postsData.setLastcomment("Wow. Congratulations! Can't wait to see you again.")
-
-             postList.add(postsData)
-         }
- */
-
         //firebase recyclerview
         mDatabase = FirebaseDatabase.getInstance().reference
         val postsQuery = mDatabase.child("Posts")
@@ -155,6 +137,7 @@ class ForumHomeFragment : Fragment() {
         }
 
         mRecyclerView.adapter = mPostsViewHolder
+
     }
 
     class PostsViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {

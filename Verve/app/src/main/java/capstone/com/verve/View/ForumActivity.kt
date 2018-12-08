@@ -69,11 +69,10 @@ class ForumActivity : BaseView(), AcceptListener {
     private fun bindViewAndAdapter() {
         val pageAdapter = ForumPagerAdapter(supportFragmentManager, 2)
         viewpager.adapter = pageAdapter
-        viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout as TabLayout?))
+        viewpager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))
     }
 
     private fun showPostDialog() {
-        showProgressDialog()
         val fm = supportFragmentManager
         var editNameDialogFragment = ForumAddPostFragment.newInstance("What's Up?")
         editNameDialogFragment.setListener(this@ForumActivity)

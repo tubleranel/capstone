@@ -11,11 +11,10 @@
 			android:layout_width="0dp"
 			android:layout_height="0dp" app:srcCompat="@drawable/findbg"
 			android:id="@+id/img_bg"
-			android:elevation="20dp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" android:scaleType="fitXY" android:layout_marginBottom="8dp"
-			app:layout_constraintBottom_toTopOf="@+id/linearLayout"/>
+			app:layout_constraintBottom_toBottomOf="parent"/>
 	<ImageView
 			android:layout_width="wrap_content"
 			android:layout_height="0dp" app:srcCompat="@mipmap/ic_menuwhite"
@@ -33,12 +32,12 @@
 
 	<android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
 										  android:id="@+id/guideline45"
-										  android:orientation="horizontal" app:layout_constraintGuide_percent="0.14"/>
+										  android:orientation="horizontal" app:layout_constraintGuide_percent="0.12"/>
 
 
 	<ImageView
 			android:layout_width="0dp"
-			android:layout_height="0dp" app:srcCompat="@drawable/bottomnavigation"
+			android:layout_height="0dp" app:srcCompat="@drawable/bottom_navi"
 			android:id="@+id/imageView9" app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +68,7 @@
 				android:layout_width="wrap_content"
 				android:layout_margin="3dp"
 				android:layout_height="wrap_content"
-				app:srcCompat="@mipmap/ic_find_black"
+				app:srcCompat="@mipmap/ic_find_green"
 				android:id="@+id/img_find"
 				android:background="@null"
 				android:layout_weight="1"
@@ -93,7 +92,7 @@
 				android:scaleType="fitCenter"
 				android:background="@null"
 				android:layout_height="wrap_content"
-				app:srcCompat="@mipmap/ic_vervelogo_green"
+				app:srcCompat="@mipmap/ic_vervelogoblack"
 				android:id="@+id/img_home"
 				android:layout_weight="1"/>
 
@@ -117,5 +116,22 @@
 				android:id="@+id/img_messages"
 				android:layout_weight="1"/>
 	</LinearLayout>
+
+	<TextView
+			android:text="FIND"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:letterSpacing="0.1"
+			android:shadowRadius="5"
+			android:shadowColor="@android:color/black"
+			android:shadowDx="5"
+			android:shadowDy="5"
+			android:id="@+id/txt_find" android:textStyle="bold"
+			android:textSize="32sp" android:textColor="@color/White"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/guideline44"
+			app:layout_constraintBottom_toTopOf="@+id/guideline45"
+			android:layout_marginStart="32dp" app:layout_constraintStart_toStartOf="parent"
+			android:layout_marginLeft="32dp"/>
 
 </android.support.constraint.ConstraintLayout>

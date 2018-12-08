@@ -36,7 +36,7 @@ class ForumActivity : BaseView(), AcceptListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum)
 
-        var img_find = findViewById<ImageButton>(R.id.img_find)
+        var imgFind = findViewById<ImageButton>(R.id.img_find)
         var img_reminders = findViewById<ImageButton>(R.id.img_reminders)
         var img_home = findViewById<ImageButton>(R.id.img_home)
         var imgProfile = findViewById<ImageButton>(R.id.img_profile)
@@ -53,6 +53,10 @@ class ForumActivity : BaseView(), AcceptListener {
         //BOTTOM NAVIGATION REGION
         imgProfile.setOnClickListener {
             showProfile()
+        }
+
+        imgFind.setOnClickListener {
+            showFind()
         }
         //BOTTOM NAVIGATION REGION
 
@@ -81,6 +85,11 @@ class ForumActivity : BaseView(), AcceptListener {
 
     private fun showProfile() {
         val intent = Intent(this@ForumActivity, ProfileActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showFind() {
+        val intent = Intent(this@ForumActivity, FindActivity::class.java)
         startActivity(intent)
     }
 

@@ -57,8 +57,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="ic_close" />
+                                      <entry key="imageAsset" value="D:\Documents\THESIS1\Mockup\findicongreen.png" />
+                                      <entry key="outputName" value="ic_find_green" />
                                     </map>
                                   </option>
                                 </PersistentState>

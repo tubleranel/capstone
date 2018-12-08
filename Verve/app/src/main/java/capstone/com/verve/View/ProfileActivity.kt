@@ -33,6 +33,7 @@ class ProfileActivity : AppCompatActivity() {
     var txt_username : TextView? = null
     var tabs: TabLayout? = null
     var home: ImageButton? = null
+    var find: ImageButton? = null
     internal var userDetails = UserDetails()
     internal var firebaseConnection = FirebaseConnection()
 
@@ -51,9 +52,14 @@ class ProfileActivity : AppCompatActivity() {
         btn_logout = findViewById(R.id.btn_logout)
         tabs = findViewById(R.id.tabLayout)
         home = findViewById(R.id.img_home)
+        find = findViewById(R.id.img_find)
 
         home?.setOnClickListener {
             showForum()
+        }
+
+        find?.setOnClickListener {
+            showFind()
         }
 
 
@@ -75,6 +81,11 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun showForum() {
         val intent = Intent(this@ProfileActivity, ForumActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showFind() {
+        val intent = Intent(this@ProfileActivity, FindActivity::class.java)
         startActivity(intent)
     }
 

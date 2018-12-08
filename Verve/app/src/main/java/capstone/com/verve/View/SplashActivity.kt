@@ -14,18 +14,23 @@ import android.widget.ImageView
 import android.content.pm.PackageManager
 import android.content.ComponentName
 import android.view.WindowManager
+import android.widget.TextView
 
 
 class SplashActivity : AppCompatActivity() {
 
     private var logo: ImageView? = null
-    private val splashTimeOut: Long = 1800
+    private var verve: TextView? = null
+    private var verve2: TextView? = null
+    private val splashTimeOut: Long = 1700
 
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash)
         logo = findViewById(R.id.img_logo)
+        verve = findViewById(R.id.txt_verve)
+        verve2 = findViewById(R.id.txt_verve2)
 
         Handler().postDelayed({
             val i = Intent(this@SplashActivity, LoginActivity::class.java)
@@ -35,6 +40,9 @@ class SplashActivity : AppCompatActivity() {
 
         val splashAnimation = AnimationUtils.loadAnimation(this, R.anim.splashanimation)
         logo!!.startAnimation(splashAnimation)
+        verve!!.startAnimation(splashAnimation)
+        verve2!!.startAnimation(splashAnimation)
+
 
     }
 }

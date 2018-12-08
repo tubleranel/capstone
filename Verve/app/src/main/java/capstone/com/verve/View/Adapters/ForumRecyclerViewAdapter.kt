@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.TextView
 import capstone.com.verve.Interface.iUserClickListener
 import capstone.com.verve.Model.ForumData
@@ -49,9 +50,8 @@ class ForumRecyclerViewAdapter (var items: MutableList<ForumData>) : RecyclerVie
         }
     }
 
+
      fun option(v: View){
-
     }
-
 
 }

@@ -6,19 +6,22 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Filter
 import android.widget.ImageButton
 import android.widget.ImageView
 import capstone.com.verve.Presenter.Posts
 import capstone.com.verve.Presenter.UserPosts
 import capstone.com.verve.Presenter.Users
-
 import capstone.com.verve.R
 import capstone.com.verve.View.Adapters.ForumPagerAdapter
 import capstone.com.verve.View.Adapters.ForumRecyclerViewAdapter
+import capstone.com.verve.View.ForumActivity
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -26,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_forum_following.*
 import kotlinx.android.synthetic.main.item_post_forum.view.*
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_forum.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,7 +46,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  *
  */
-class ForumFollowingFragment : Fragment() {
+class ForumHomeFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -124,7 +128,6 @@ class ForumFollowingFragment : Fragment() {
         val postsOptions =
             FirebaseRecyclerOptions.Builder<UserPosts>().setQuery(postsQuery, UserPosts::class.java).build()
 
-
         mPostsViewHolder = object : FirebaseRecyclerAdapter<UserPosts, PostsViewHolder>(postsOptions) {
             override fun onBindViewHolder(holder: PostsViewHolder, position: Int, model: UserPosts) {
                 holder.bind(getItem(position))
@@ -155,7 +158,6 @@ class ForumFollowingFragment : Fragment() {
     }
 
     class PostsViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-
         fun bind(post: UserPosts) = with(itemView) {
             txtDate?.text = post.datePost
 
@@ -176,10 +178,76 @@ class ForumFollowingFragment : Fragment() {
              txtLastComment?.text = post.lastComment
              txtDateComment?.text = post.dateComment
              txtTimeComment?.text = post.timeComment*/
-
         }
     }
 
+    /*//Search Filter
+    fun getFilter() : Filter {
+        return object: Filter() {
+            override fun performFiltering(charSequence:CharSequence) : FilterResults {
+                val charString = charSequence.toString()
+                if (charString.isEmpty())
+                {
+                    itemsList = items
+                }
+                else
+                {
+                    val filteredList = ArrayList<UserPosts>()
+                    for (row in items)
+                    {
+                        if (row.uName.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.uDate.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.uTime.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.postTitle.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.postDetails.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.lastPerson.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.lastComment.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.dateComment.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                        if (row.timeComment.toLowerCase().contains(charString.toLowerCase()))
+                        {
+                            filteredList.add(row)
+                        }
+                    }
+                    itemsList = filteredList
+                }
+
+                val filterResults = FilterResults()
+                filterResults.values = itemsList
+                return filterResults
+            }
+
+            override fun publishResults(charSequence:CharSequence, filterResults: FilterResults) {
+                itemsList = filterResults.values as ArrayList<UserPosts>
+                // refresh the list with filtered data
+                notifyDataSetChanged()
+            }
+        }
+    }
+*/
 
     /**
      * This interface must be implemented by activities that contain this
@@ -209,7 +277,7 @@ class ForumFollowingFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ForumFollowingFragment().apply {
+            ForumHomeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

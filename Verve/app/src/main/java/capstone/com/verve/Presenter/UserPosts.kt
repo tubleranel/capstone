@@ -9,7 +9,7 @@ class UserPosts {
     lateinit var postTitle: String
     lateinit var timePost: String
     lateinit var uid: String
-    lateinit var postId: String
+//    lateinit var postId: String
 
 
     constructor() {
@@ -36,27 +36,7 @@ class UserPosts {
         this.uid = uid
     }
 
-    constructor(
-        datePost: String,
-        firstname: String,
-        middlename: String,
-        lastname: String,
-        postDescription: String,
-        postTitle: String,
-        timePost: String,
-        uid: String,
-        postId: String
-    ) {
-        this.datePost = datePost
-        this.firstname = firstname
-        this.middlename = middlename
-        this.lastname = lastname
-        this.postDescription = postDescription
-        this.postTitle = postTitle
-        this.timePost = timePost
-        this.uid = uid
-        this.postId = postId
-    }
+
 
 
 }

@@ -9,22 +9,26 @@ import capstone.com.verve.R
 
 class FindActivity : AppCompatActivity() {
 
+    var imgForum: ImageButton? = null
+    var imgProfile: ImageButton? = null
+    var imgReminders: ImageButton? = null
+    var imgChat: ImageButton? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_find)
 
-        var imgFind = findViewById<ImageButton>(R.id.img_find)
-        var img_reminders = findViewById<ImageButton>(R.id.img_reminders)
-        var imgForum = findViewById<ImageButton>(R.id.img_home)
-        var imgProfile = findViewById<ImageButton>(R.id.img_profile)
-        var img_messages = findViewById<ImageButton>(R.id.img_messages)
+        imgReminders = findViewById(R.id.img_reminders)
+        imgForum = findViewById(R.id.img_home)
+        imgProfile = findViewById(R.id.img_profile)
+        imgChat = findViewById(R.id.img_messages)
 
-        imgForum.setOnClickListener {
+        imgForum?.setOnClickListener {
             showForum()
         }
 
-        imgProfile.setOnClickListener {
+        imgProfile?.setOnClickListener {
             showProfile()
         }
     }

@@ -8,4 +8,6 @@
     <color name="Pale">#d8e6dd</color>
     <color name="LightGray">#747474</color>
     <color name="UnselectedCardColor">#D8E6DD</color>
+    <color name="LineDarkGreen">#68A87D</color>
+
 </resources>

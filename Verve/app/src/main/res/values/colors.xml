@@ -5,6 +5,7 @@
     <color name="colorAccent">#08CFA0</color>
     <color name="White">#ffffff</color>
     <color name="GrayWhite">#d6d5d5</color>
-    <color name="Pale">#a1a1a1</color>
+    <color name="Pale">#d8e6dd</color>
     <color name="LightGray">#747474</color>
+    <color name="UnselectedCardColor">#D8E6DD</color>
 </resources>

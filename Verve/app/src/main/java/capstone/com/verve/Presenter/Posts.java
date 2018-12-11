@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 import android.widget.Toast;
+import capstone.com.verve.API.PostInterface;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
-public class Posts {
+public class Posts implements PostInterface {
     String saveCurrentDate = "";
     String saveCurrentTime = "";
     String saveCurrentTimePost = "";
@@ -29,6 +30,7 @@ public class Posts {
     String commentTimePost = "";
     String commentUniqueKey = "";
 
+    @Override
     public void savePosts(final DatabaseReference userRef, final DatabaseReference postRef, FirebaseAuth auth,
                           EditText postTitle, EditText descTitle, final Context context) {
 
@@ -106,7 +108,7 @@ public class Posts {
 
     }
 
-
+    @Override
     public void saveComment(final DatabaseReference userRef, final FirebaseAuth auth, final String postKey,
                             final DatabaseReference postRef, final Context context,  EditText comment) {
         //FOR UNIQUE NAME

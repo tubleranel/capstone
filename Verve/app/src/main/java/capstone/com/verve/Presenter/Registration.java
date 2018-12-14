@@ -108,9 +108,9 @@ public class Registration {
         getGender(male, female);
 
 
-        userAndEmailAuth(et_email, et_password, encryptedFirstName, encryptedMiddleName,
-                encryptedLastName, encryptedLastName, encryptedMobile, encryptedAddress, encryptedBirthdate, getInfo.getGender(),
-                encryptedRole, context, auth, user);
+        userAndEmailAuth(et_email, et_password, et_firstname, et_middlename,
+                et_lastname, et_username, et_mobile, et_address, et_birthdate, getInfo.getGender(),
+                "Patient", context, auth, user);
     }
 
     private void userAndEmailAuth(final String email, String password, final String firstname, final String middlename,
@@ -158,7 +158,7 @@ public class Registration {
             gender = "Male";
             try {
                 encryptedGender = AESCrypt.encrypt(sec.setSecurityKey(), gender);
-                getInfo.setGender(encryptedGender);
+                getInfo.setGender(gender);
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
             }
@@ -167,7 +167,7 @@ public class Registration {
             getInfo.setGender(gender);
             try {
                 encryptedGender = AESCrypt.encrypt(sec.setSecurityKey(), gender);
-                getInfo.setGender(encryptedGender);
+                getInfo.setGender(gender);
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
             }

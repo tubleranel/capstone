@@ -56,17 +56,17 @@ public class UserDetails {
                         e.printStackTrace();
                     }
 
-                    username.setText(decryptedUsername);
-                    userAddress.setText(decryptedAddress);
+                    username.setText(uName);
+                    userAddress.setText(address);
                     email.setText(emailAddress);
-                    birthDate.setText(decryptedBirthday);
+                    birthDate.setText(birthday);
 
-                    if (decryptedMiddleName.isEmpty()){
-                        String nameNoMiddle = decryptedFirstName.concat(" " + decryptedLastName);
+                    if (middlename.isEmpty()){
+                        String nameNoMiddle = firstname.concat(" " + lastname);
                         users.setWholeName(nameNoMiddle);
                         name.setText(users.getWholeName());
                     }else{
-                        String nameWithMiddle = decryptedFirstName.concat(" " + decryptedMiddleName.charAt(0) + ".").concat(" " + decryptedLastName);
+                        String nameWithMiddle = firstname.concat(" " + middlename.charAt(0) + ".").concat(" " + lastname);
                         users.setWholeName(nameWithMiddle);
                         name.setText(nameWithMiddle);
                     }

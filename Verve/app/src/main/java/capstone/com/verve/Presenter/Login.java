@@ -66,7 +66,7 @@ public class Login {
                                 } catch (GeneralSecurityException e) {
                                     e.printStackTrace();
                                 }
-                                if (decryptRole.equals(patient)) {
+                                if (role.equals(patient)) {
                                     sendPatientToForum(context);
                                 }
                             }

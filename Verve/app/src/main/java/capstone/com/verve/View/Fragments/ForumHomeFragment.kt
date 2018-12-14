@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.Filter
 import android.widget.ImageButton
 import android.widget.ImageView
+import capstone.com.verve.Presenter.Comments
 import capstone.com.verve.Presenter.Posts
 import capstone.com.verve.Presenter.UserPosts
 import capstone.com.verve.Presenter.Users
@@ -59,6 +60,7 @@ class ForumHomeFragment : Fragment() {
     private var userRef: DatabaseReference? = null
     private var auth: FirebaseAuth? = null
     internal var posts = Posts()
+    internal var comments = Comments()
 
     private var editComment: EditText? = null
 
@@ -129,7 +131,7 @@ class ForumHomeFragment : Fragment() {
                 auth = FirebaseAuth.getInstance()
 
                 commentImage?.setOnClickListener {
-                    posts.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment)
+                    comments.saveComment(userRef, auth, postId, postRef, activity!!.applicationContext, editComment)
                 }
                 return PostsViewHolder(view)
             }
